@@ -1,0 +1,122 @@
+<!--<!DOCTYPE jeopardy SYSTEM "jeopardy.dtd">--><jeopardy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="jeopardy.xsd">
+  <overview>
+    This <a href="http://dbai.tuwien.ac.at/education/dbs/">Jeopardy</a> quiz is
+    really
+    <p>
+      awesome!
+    </p>
+  </overview>
+
+  <categories>
+    <category name="TV">
+      <question id="1" value="100">
+        <text>The name of the Simpsons' baby.</text>
+        <answer correct="yes">Who is Maggie?</answer>
+        <answer>Who is Marge?</answer>
+        <answer>Who is Mabel?</answer>
+        <answer>Who is Maria?</answer>
+      </question>
+      <question id="2" value="200">
+        <text>Homer's favorite beer.</text>
+        <answer>What is Corona?</answer>
+        <answer correct="yes">What is Duff?</answer>
+        <answer>What is Heineken?</answer>
+        <answer>What is Ottakringer?</answer>
+      </question>
+      <question id="3" value="500">
+        <text>A neighbor of the Simpsons.</text>
+        <answer correct="yes">Who is Rod Flanders?</answer>
+        <answer correct="yes">Who is Tod Flanders?</answer>
+        <answer>Who is Brad Fletcher?</answer>
+        <answer correct="yes">Who is Ned Flanders?</answer>
+        <answer>Who is Patty Bouvier?</answer>
+      </question>
+      <question id="4" value="750">
+        <text>A character in the TV series "The Big Bang Theory".</text>
+        <answer correct="yes">Who is Sheldon Lee Cooper?</answer>
+        <answer>Who is Malcolm Wilkerson?</answer>
+        <answer>Who is Charles Montgomery Burns?</answer>
+        <answer correct="yes">Who is Howard Joel Wolowitz?</answer>
+        <answer correct="yes">Who is Leonard Leakey Hofstadter?</answer>
+      </question>
+    </category>
+    <category name="TUWIEN">
+      <question id="5" value="100">
+        <text>These courses are in the modul EWA.</text>
+        <answer>What is IT Strategy?</answer>
+        <answer correct="yes">What is Web Engineering?</answer>
+        <answer>What is Object Oriented Modelling?</answer>
+        <answer correct="yes">What is Semistructured Data?</answer>
+      </question>
+      <question id="6" value="1000">
+        <text>TU Vienna has been founded.</text>
+        <answer correct="yes">What happened in 1815?</answer>
+        <answer>What happened in 1810?</answer>
+        <answer>What happened in 1915?</answer>
+        <answer>What happened in 2010?</answer>
+      </question>
+    </category>
+    <category name="Web"/>
+  </categories>
+
+
+
+  <users>
+    <user gender="male" username="Bart">
+      <password>basi</password>
+      <fullname>Bart Simpson</fullname>
+      <birthdate>1982-04-01</birthdate>
+    </user>
+
+    <user gender="female" username="Lisa">
+      <password>lisi</password>
+      <name>
+        <firstname>Lisa</firstname>
+        <lastname>Simpson</lastname>
+      </name>
+      <birthdate>1984-08-02</birthdate>
+    </user>
+
+    <user gender="male" username="Homer">
+      <password>hosi</password>
+      <name>
+        <firstname>Homer</firstname>
+        <lastname>Simpson</lastname>
+      </name>
+      <birthdate>1955-05-10</birthdate>
+      <email>homer.simpson@gmail.com</email>
+      <email>homer.simpson@hotmail.com</email>
+    </user>
+  </users>
+
+  <games>
+    <game session="abcd">
+      <player ref="Bart"/>
+      <player ref="Lisa"/>
+
+      <asked question="1">
+        <givenanswer player="Bart">Who is Maggie?</givenanswer>
+        <givenanswer player="Bart">Who is Maria?</givenanswer>
+        <givenanswer player="Lisa">Who is Maggie?</givenanswer>
+      </asked>
+	  
+	  <asked question="4">
+	    <givenanswer player="Bart">Who is Sheldon Lee Cooper?</givenanswer>
+	    <givenanswer player="Lisa">Who is Sheldon Lee Cooper?</givenanswer>
+        <givenanswer player="Lisa">Who is Howard Joel Wolowitz?</givenanswer>
+        <givenanswer player="Lisa">Who is Leonard Leakey Hofstadter?</givenanswer>
+	  </asked>
+
+
+    </game>
+	
+    <game session="abc">
+		<player ref="Bart"/>
+		
+		<asked question="5">
+			<givenanswer player="Bart">What is Object Oriented Modelling?</givenanswer>
+			<givenanswer player="Bart">What is Semistructured Data?</givenanswer>
+		</asked>
+	</game>
+</games>
+</jeopardy>

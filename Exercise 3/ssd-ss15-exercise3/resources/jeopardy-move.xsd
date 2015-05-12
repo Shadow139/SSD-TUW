@@ -1,0 +1,15 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+	<xsd:element name="move" type="move" />
+	
+	<xsd:complexType name="move">
+		<xsd:sequence>
+			<xsd:element name="player" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="question" type="xsd:nonNegativeInteger" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="answer" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="session" type="xsd:ID" use="required"/>
+	</xsd:complexType>
+  
+</xsd:schema>

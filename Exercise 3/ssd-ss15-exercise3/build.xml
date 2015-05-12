@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ssd-exercise3-ss15" 
+         default="clean" 
+         basedir=".">
+    
+    <!-- Directories -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="resources.dir" value="resources"/>
+    <property name="output.dir" value="output"/>
+
+    <!-- SSD -->
+    <property name="inputpath" value="${resources.dir}/jeopardy.xml"/>
+    <property name="outputpath" value="${output.dir}/jeopardy-out.xml"/>
+	<property name="movedoc" value="${resources.dir}/jeopardy-move.xml" />
+    
+	<!-- XQuery (a) -->
+    <property name="xquery-a.inputpath" value="${resources.dir}/jeopardy.xml"/>
+    <property name="xquery-a.querypath" value="${src.dir}/xquery-a.xq"/>
+    <property name="xquery-a.outputpath" value="${output.dir}/xquery-out-a.xml"/>
+	
+    <!-- XQuery (b) -->
+    <property name="xquery-b.inputpath" value="${resources.dir}/jeopardy.xml"/>
+    <property name="xquery-b.querypath" value="${src.dir}/xquery-b.xq"/>
+    <property name="xquery-b.outputpath" value="${output.dir}/xquery-out-b.xml"/>
+    
+    <!-- Submission .zip file -->
+    <property name="zip.name" value="ssd-exercise3-ss15.zip"/>
+    
+	<path id="classpath-ssd">
+        <pathelement location="${build.dir}"/>
+    </path>
+	
+    <!-- Classpath: References compiled classes and libraries in lib.dir -->
+    <path id="classpath-query">
+        <fileset dir="${lib.dir}">
+            <include name="saxon9he.jar"/>
+            <include name="xercesImpl.jar"/>
+            <include name="xml-apis.jar"/>
+        </fileset>
+    </path>
+    
+    <!-- Create the .zip file for the submission of this exercise -->
+    <target name="zip">
+        <delete file="${zip.name}" />
+        <zip destfile="${zip.name}" encoding="UTF-8">
+            <zipfileset dir="${src.dir}" prefix="src/" />
+			<zipfileset dir="${resources.dir}" prefix="resources/" />
+			<zipfileset dir="${output.dir}" prefix="output" />
+        </zip>
+    </target>
+    
+    <!-- Clean the project -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${output.dir}"/>
+    </target>
+
+    <!-- Compile -->
+    <target name="compile">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${output.dir}"/>
+        <javac srcdir="${src.dir}" 
+               destdir="${build.dir}"
+               debug="true" 
+               deprecation="true"
+               includeantruntime="false"/>
+    </target>
+	
+    <target name="run-dry" depends="compile">
+        <java classname="ssd.SSD" classpathref="classpath-ssd">
+            <arg value="${inputpath}"/>
+			<arg value="${movedoc}"/>
+            <arg value="${outputpath}"/>
+        </java>
+    </target>
+    
+    <target name="run-persistent" depends="compile">
+        <java classname="ssd.SSD" classpathref="classpath-ssd">
+            <arg value="${inputpath}"/>
+			<arg value="${movedoc}"/>
+            <arg value="${inputpath}"/>
+        </java>
+    </target>
+    
+    <target name="run-xquery-a">
+        <java classname="net.sf.saxon.Query" classpathref="classpath-query">
+            <arg value="-s:${xquery-a.inputpath}"/>
+            <arg value="-q:${xquery-a.querypath}"/>
+            <arg value="-o:${xquery-a.outputpath}"/>
+        </java>
+    </target>
+	
+	<target name="run-xquery-b">
+        <java classname="net.sf.saxon.Query" classpathref="classpath-query">
+            <arg value="-s:${xquery-b.inputpath}"/>
+            <arg value="-q:${xquery-b.querypath}"/>
+            <arg value="-o:${xquery-b.outputpath}"/>
+        </java>
+    </target>
+    
+</project>
