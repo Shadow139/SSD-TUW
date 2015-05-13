@@ -92,6 +92,7 @@ public class SSD {
         }
 
         out.println(text);
+        out.close();
 
     }
     /**

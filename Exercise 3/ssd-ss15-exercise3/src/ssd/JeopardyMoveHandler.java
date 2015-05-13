@@ -24,7 +24,7 @@ public class JeopardyMoveHandler extends DefaultHandler {
 	 * Use this xPath variable to create xPath expression that can be
 	 * evaluated over the XML document.
 	 */
-	private static XPath xPath = XPathFactory.newInstance().newXPath();
+//	private static XPath xPath = XPathFactory.newInstance().newXPath();
 	
 	/**
 	 * Store and manipulate the Jeopardy XML document here.
@@ -232,7 +232,6 @@ public class JeopardyMoveHandler extends DefaultHandler {
     }
 
     private void createAsked(Node game) {
-
         Element elem = jeopardyDoc.createElement("asked");
 
         elem.setAttribute("question",moveObject.getQuestion() + "");
@@ -240,14 +239,44 @@ public class JeopardyMoveHandler extends DefaultHandler {
 
         for(String answer: moveObject.getAnswerList()){
             Element e = jeopardyDoc.createElement("givenanswer");
-            e.setAttribute("player",moveObject.getPlayer());
-            e.setNodeValue(answer);
+            e.setAttribute("player", moveObject.getPlayer());
+            e.setTextContent(answer);
             asked.appendChild(e);
         }
     }
 
     private void appendAnswers(Node asked) {
 
+        System.out.println("nodeName asked: " + asked.getNodeName());
+
+        NodeList givenanswers = asked.getChildNodes();
+
+        for(String answer: moveObject.getAnswerList()){
+           // if(givenanswers.getLength() == 0 || checkDuplicateGivenAnswer(answer, givenanswers)) {
+                Element e = jeopardyDoc.createElement("givenanswer");
+                e.setAttribute("player", moveObject.getPlayer());
+                e.setTextContent(answer);
+                asked.appendChild(e);
+           // }
+        }
+    }
+
+    private boolean checkDuplicateGivenAnswer(String answer,NodeList givenanswers){
+        System.out.println("givenanswers.getLength(): " + givenanswers.getLength());
+
+        for (int i = 0; i < givenanswers.getLength(); i++) {
+            Node node = givenanswers.item(i);
+            System.out.println("node.getTextContent: " + node.getTextContent());
+            System.out.println("node.getNodeValue: " + node.getNodeValue());
+            System.out.println("node.getParentNode: " + node.getParentNode());
+
+            /*
+            if(node.getAttributes().getNamedItem("player").getNodeValue().equals(moveObject.getPlayer())
+                    && node.getTextContent().equals(answer)){
+                return false;
+            }*/
+        }
+        return true;
     }
 
     private Node getExistingAsked(ArrayList<Node> askedList, int question) {
