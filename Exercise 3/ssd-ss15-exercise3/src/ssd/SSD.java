@@ -1,7 +1,6 @@
 package ssd;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.*;
 import java.util.List;
 
 import javax.xml.XMLConstants;
@@ -66,8 +65,35 @@ public class SSD {
         JeopardyMoveHandler handler = new JeopardyMoveHandler(document);
 
         parser.setContentHandler(handler);
+
+        parser.parse(movePath);
+
+        document = handler.getDocument();
+
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+        StreamResult result = new StreamResult(new StringWriter());
+        DOMSource source = new DOMSource(document);
+        transformer.transform(source, result);
+
+        String xmlString = result.getWriter().toString();
+        //System.out.println(xmlString);
+        writeToXml(xmlString,outputPath);
+
     }
 
+    private static void writeToXml( String text, String outputPath){
+        PrintWriter out = null;
+        try {
+            out = new PrintWriter(outputPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        out.println(text);
+
+    }
     /**
      * Prints an error message and exits with return code 1
      * 
