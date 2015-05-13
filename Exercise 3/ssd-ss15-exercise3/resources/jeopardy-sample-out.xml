@@ -112,14 +112,14 @@
 	
     <game session="abc">
 		<player ref="Lisa"/>
-<player ref="Bart"/>
+        <player ref="Bart"/>
 		
 		<asked question="5">
 			<givenanswer player="Bart">What is Object Oriented Modelling?</givenanswer>
 			<givenanswer player="Bart">What is Semistructured Data?</givenanswer>
-		<givenanswer player="Lisa">What is Semistructured Data?</givenanswer>
-<givenanswer player="Lisa">What is Web Engineering?</givenanswer>
-</asked>
+		    <givenanswer player="Lisa">What is Semistructured Data?</givenanswer>
+            <givenanswer player="Lisa">What is Web Engineering?</givenanswer>
+        </asked>
 	</game>
 </games>
 </jeopardy>

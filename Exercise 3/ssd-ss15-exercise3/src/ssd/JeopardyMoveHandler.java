@@ -168,23 +168,15 @@ public class JeopardyMoveHandler extends DefaultHandler {
 
     }
 
-    private void insertAnswers(Node game, NodeList list) {
-        ArrayList<Node> askedList = new ArrayList<Node>();
-
-    }
-
     public void insertPlayerRef(Node game,NodeList list){
         ArrayList<Node> playerRefList = new ArrayList<Node>();
         for (int i = 0; i < list.getLength(); i++) {
-
             Node node = list.item(i);
             System.out.println("insertPlayerRef: - nodeName: " + node.getNodeName());
-
             if("player".equals(node.getNodeName())){
                 playerRefList.add(node);
                 System.out.println("    player found! - size: " + playerRefList.size());
             }
-
         }
 
         if(playerRefList.size() == 0){
@@ -219,7 +211,53 @@ public class JeopardyMoveHandler extends DefaultHandler {
 
         Node first = game.getFirstChild();
         game.insertBefore(elem,first);
+    }
 
+    private void insertAnswers(Node game, NodeList list) {
+        ArrayList<Node> askedList = new ArrayList<Node>();
+        for (int i = 0; i < list.getLength(); i++) {
+            Node node = list.item(i);
+            System.out.println("askedList: - nodeName: " + node.getNodeName());
+            if("asked".equals(node.getNodeName())){
+                askedList.add(node);
+            }
+        }
+        Node asked = getExistingAsked(askedList, moveObject.getQuestion());
+
+        if(asked != null){
+            appendAnswers(asked);
+        }else{
+            createAsked(game);
+        }
+    }
+
+    private void createAsked(Node game) {
+
+        Element elem = jeopardyDoc.createElement("asked");
+
+        elem.setAttribute("question",moveObject.getQuestion() + "");
+        Node asked = game.appendChild(elem);
+
+        for(String answer: moveObject.getAnswerList()){
+            Element e = jeopardyDoc.createElement("givenanswer");
+            e.setAttribute("player",moveObject.getPlayer());
+            e.setNodeValue(answer);
+            asked.appendChild(e);
+        }
+    }
+
+    private void appendAnswers(Node asked) {
+
+    }
+
+    private Node getExistingAsked(ArrayList<Node> askedList, int question) {
+        for (int i = 0; i < askedList.size(); i++) {
+            Node node = askedList.get(i);
+            if((question + "").equals(node.getAttributes().getNamedItem("question").getNodeValue())){
+                return node;
+            }
+        }
+        return null;
     }
 
 
