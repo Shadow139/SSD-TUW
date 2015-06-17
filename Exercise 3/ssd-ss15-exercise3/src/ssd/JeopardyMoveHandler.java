@@ -24,7 +24,7 @@ public class JeopardyMoveHandler extends DefaultHandler {
 	 * Use this xPath variable to create xPath expression that can be
 	 * evaluated over the XML document.
 	 */
-//	private static XPath xPath = XPathFactory.newInstance().newXPath();
+	private static XPath xPath = XPathFactory.newInstance().newXPath();
 	
 	/**
 	 * Store and manipulate the Jeopardy XML document here.
